@@ -1,11 +1,11 @@
 dte(){
-  dte="$(date +"%A, %B %d | 🕒 %l:%M%p")"
-  echo -e "$dte"
+  dte="$(date +"%d %B %H:%M:%S")"
+  echo "$dte"
 }
 
 mem(){
-  mem=`free -m | awk '/Pamięć/ {printf "%d MiB/%d MiB\n", $3, $2 }'`
-  echo -e "🖪 $mem"
+  mem=`free -m | awk '/Mem:/ {printf "%dMB / %dMB\n", $3, $2 }'`
+  echo  "MEM: $mem"
 }
 
 cpu(){
@@ -15,11 +15,16 @@ cpu(){
   read cpu a b c idle rest < /proc/stat
   total=$((a+b+c+idle))
   cpu=$((100*( (total-prevtotal) - (idle-previdle) ) / (total-prevtotal) ))
-  echo -e "💻 $cpu% cpu"
+  echo "CPU: $cpu%"
+}
+
+bat(){
+  bat=`cat /sys/class/power_supply/BAT0/capacity`
+  echo "B: $bat%"
 }
 
 #while true; do
-     xsetroot -name "$(cpu) | $(mem) | $(dte)"
+xsetroot -name "$(cpu) | $(mem)| $(bat) | $(dte)"
 #     sleep 10s    # Update time every ten seconds
 #done &
 
