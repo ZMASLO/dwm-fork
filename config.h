@@ -30,7 +30,6 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
 };
 
 /* layout(s) */
@@ -62,6 +61,11 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "st", NULL };
 static const char *volup[]  = { "amixer","-q","sset","Master","5%+", NULL };
 static const char *voldown[]  = { "amixer","-q","sset","Master","5%-", NULL };
+static const char *voltoggle[]  = { "amixer","-q","sset","Master","toggle", NULL };
+static const char *mictoggle[]  = { "amixer","-q","sset","Capture","toggle", NULL };
+static const char *brightup[]  = { "xbacklight","-inc","10", NULL };
+static const char *brightdown[]  = { "xbacklight","-dec","10", NULL };
+
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -69,6 +73,10 @@ static Key keys[] = {
 	{ MODKEY, 	                XK_Return, spawn,          {.v = termcmd } },
 	{ 0,      	                XF86XK_AudioRaiseVolume, spawn,          {.v = volup } },
 	{ 0, 	                        XF86XK_AudioLowerVolume, spawn,          {.v = voldown } },
+	{ 0, 	                        XF86XK_AudioMute, spawn,          {.v = voltoggle } },
+	{ 0, 	                        XF86XK_AudioMicMute, spawn,          {.v = mictoggle } },
+	{ 0, 	                        XF86XK_MonBrightnessUp, spawn,          {.v = brightup } },
+	{ 0, 	                        XF86XK_MonBrightnessDown, spawn,          {.v = brightdown } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },

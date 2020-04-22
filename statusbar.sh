@@ -4,7 +4,7 @@ dte(){
 }
 
 mem(){
-  mem=`free -m | awk '/Mem:/ {printf "%dMB / %dMB\n", $3, $2 }'`
+  mem=`free -m | awk '/Pamięć:/ {printf "%dMB / %dMB\n", $3, $2 }'`
   echo  "MEM: $mem"
 }
 
